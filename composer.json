@@ -1,0 +1,26 @@
+{
+  "name": "iontrader/server-api-php",
+  "description": "High-performance TCP connector for ION trading platform (PHP)",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "IonTrader",
+      "email": "dev@iontrader.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "ext-json": "*",
+    "react/socket": "^1.16",
+    "react/event-loop": "^1.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "IonTrader\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
+}
