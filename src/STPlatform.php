@@ -1,13 +1,13 @@
 <?php
 
-namespace IonTrader;
+namespace ScaleTrade;
 
 use Exception;
 use React\EventLoop\Loop;
 use React\Socket\Connector;
 use React\Promise\Deferred;
 
-class IONPlatform
+class STPlatform
 {
     private string $url;
     private string $name;
@@ -15,7 +15,7 @@ class IONPlatform
     private string $token;
     private array $autoSubscribeChannels = [];
     private bool $ignoreEvents = false;
-    private string $prefix = 'ion';
+    private string $prefix = 'st';
     private string $mode = 'live';
     private $broker;
     private $ctx;
@@ -74,17 +74,17 @@ class IONPlatform
             function ($socket) {
                 $this->socket = $socket;
                 $this->connected = true;
-                echo "[ION:{$this->name}] Connected to {$this->url}\n";
+                echo "[ScaleTrade:{$this->name}] Connected to {$this->url}\n";
 
                 // Auto-subscribe after delay
                 if (!empty($this->autoSubscribeChannels)) {
                     $this->loop->addTimer(0.5, function () {
                         $this->subscribe($this->autoSubscribeChannels)
                             ->then(function () {
-                                echo "[ION:{$this->name}] Auto-subscribed: " . implode(', ', $this->autoSubscribeChannels) . "\n";
+                                echo "[ScaleTrade:{$this->name}] Auto-subscribed: " . implode(', ', $this->autoSubscribeChannels) . "\n";
                             })
                             ->otherwise(function ($err) {
-                                echo "[ION:{$this->name}] Auto-subscribe failed: {$err->getMessage()}\n";
+                                echo "[ScaleTrade:{$this->name}] Auto-subscribe failed: {$err->getMessage()}\n";
                             });
                     });
                 }
@@ -94,7 +94,7 @@ class IONPlatform
                 $socket->on('error', [$this, 'onError']);
             },
             function ($e) {
-                echo "[ION:{$this->name}] Connection failed: {$e->getMessage()}\n";
+                echo "[ScaleTrade:{$this->name}] Connection failed: {$e->getMessage()}\n";
                 if ($this->alive) $this->reconnect();
             }
         );
@@ -171,7 +171,7 @@ class IONPlatform
                     continue;
                 }
 
-                echo "[ION:{$this->name}] Unknown array message: " . json_encode($parsed) . "\n";
+                echo "[ScaleTrade:{$this->name}] Unknown array message: " . json_encode($parsed) . "\n";
                 continue;
             }
 
@@ -205,20 +205,20 @@ class IONPlatform
                 continue;
             }
 
-            echo "[ION:{$this->name}] Unknown message: " . json_encode($parsed) . "\n";
+            echo "[ScaleTrade:{$this->name}] Unknown message: " . json_encode($parsed) . "\n";
         }
     }
 
     public function onClose(): void
     {
         $this->connected = false;
-        echo "[ION:{$this->name}] Connection closed\n";
+        echo "[ScaleTrade:{$this->name}] Connection closed\n";
         if ($this->alive) $this->reconnect();
     }
 
     public function onError(Exception $err): void
     {
-        echo "[ION:{$this->name}] Socket error: {$err->getMessage()}\n";
+        echo "[ScaleTrade:{$this->name}] Socket error: {$err->getMessage()}\n";
         if ($this->alive) $this->reconnect();
     }
 
@@ -226,7 +226,7 @@ class IONPlatform
     {
         $this->seenNotifyTokens = [];
         $this->loop->addTimer(4.0, function () {
-            echo "[ION:{$this->name}] Reconnecting...\n";
+            echo "[ScaleTrade:{$this->name}] Reconnecting...\n";
             $this->createSocket();
         });
     }
@@ -240,7 +240,7 @@ class IONPlatform
 
         $decoded = json_decode($fixed);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            echo "[ION:{$this->name}] Parse error: " . json_last_error_msg() . " for: $input\n";
+            echo "[ScaleTrade:{$this->name}] Parse error: " . json_last_error_msg() . " for: $input\n";
             return null;
         }
         return $decoded;
@@ -273,7 +273,7 @@ class IONPlatform
     public function send(object $payload): \React\Promise\PromiseInterface
     {
         if (!$this->connected) {
-            return \React\Promise\reject(new Exception("[ION:{$this->name}] Not connected"));
+            return \React\Promise\reject(new Exception("[ScaleTrade:{$this->name}] Not connected"));
         }
 
         if (!isset($payload->extID)) {
@@ -288,7 +288,7 @@ class IONPlatform
         $this->loop->addTimer(30.0, function () use ($extID, $deferred) {
             if (isset($this->pending[$extID])) {
                 unset($this->pending[$extID]);
-                $deferred->reject(new Exception("[ION:{$this->name}] Timeout for extID: $extID"));
+                $deferred->reject(new Exception("[ScaleTrade:{$this->name}] Timeout for extID: $extID"));
             }
         });
 

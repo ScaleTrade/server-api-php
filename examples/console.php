@@ -1,19 +1,19 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use IonTrader\IONPlatform;
+use ScaleTrade\STPlatform;
 
-$url  = 'broker.iontrader.com:8080';
-$name = 'ion-example';
+$url  = 'broker.scaletrade.com:8080';
+$name = 'scaletrade-example';
 $token = 'your-jwt-auth-token';
 
-$platform = new IONPlatform(
+$platform = new STPlatform(
     $url,
     $name,
     [
         'autoSubscribe' => ['EURUSD', 'BTCUSD'],
         'ignoreEvents'  => false,
-        'prefix'        => 'ion',
+        'prefix'        => 'st',
         'mode'          => 'live'
     ],
     null,

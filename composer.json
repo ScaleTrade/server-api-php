@@ -1,12 +1,12 @@
 {
-  "name": "iontrader/server-api-php",
-  "description": "High-performance TCP connector for ION trading platform (PHP)",
+  "name": "scaletrade/server-api-php",
+  "description": "High-performance TCP connector for ScaleTrade trading platform (PHP)",
   "type": "library",
   "license": "MIT",
   "authors": [
     {
-      "name": "IonTrader",
-      "email": "dev@iontrader.com"
+      "name": "ScaleTrade",
+      "email": "dev@scaletrade.com"
     }
   ],
   "require": {
@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "IonTrader\\": "src/"
+      "ScaleTrade\\": "src/"
     }
   },
   "scripts": {

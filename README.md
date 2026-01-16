@@ -1,18 +1,18 @@
 <div align="center">
 
-# ion-server-api-php
+# scaletrade-server-api-php
 
-**Ultra-low latency PHP TCP client for [IonTrader](https://iontrader.com)**  
+**Ultra-low latency PHP TCP client for [ScaleTrade](https://scaletrade.com)**  
 Real-time market data, trade execution, balance & user management via TCP.
 
-![Packagist Version](https://img.shields.io/packagist/v/iontrader/server-api-php?color=green)
+![Packagist Version](https://img.shields.io/packagist/v/scaletrade/server-api-php?color=green)
 ![PHP](https://img.shields.io/badge/php-%3E%3D8.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Downloads](https://img.shields.io/packagist/dm/iontrader/server-api-php)
+![Downloads](https://img.shields.io/packagist/dm/scaletrade/server-api-php)
 
 > **Server-to-Server (S2S) integration** — ideal for brokers, CRMs, HFT bots, and back-office systems.
 
-[Documentation](https://iontrader.com/tcp) · [Examples](./examples) · [Report Bug](https://github.com/iontrader/server-api-php/issues)
+[Documentation](https://scaletrade.com/tcp) · [Examples](./examples) · [Report Bug](https://github.com/scaletrade/server-api-php/issues)
 
 </div>
 
@@ -36,7 +36,7 @@ Real-time market data, trade execution, balance & user management via TCP.
 ## Installation
 
 ```bash
-composer require iontrader/server-api-php
+composer require scaletrade/server-api-php
 ```
 
 ---
@@ -44,10 +44,10 @@ composer require iontrader/server-api-php
 ## Quick Start
 
 ```php
-use IonTrader\IONPlatform;
+use ScaleTrade\STPlatform;
 
-$platform = new IONPlatform(
-  'broker.iontrader.com:8080', // Host:port
+$platform = new STPlatform(
+  'broker.scaletrade.com:8080', // Host:port
   'my-trading-bot',
   ['autoSubscribe' => ['EURUSD', 'BTCUSD']],
   null, null,
@@ -155,16 +155,16 @@ See [`examples/console.php`](examples/console.php)
 
 ## Documentation
 
-- **TCP API**: [https://iontrader.com/tcp](https://iontrader.com/tcp)
-- **Client API**: [https://iontrader.com/client-api](https://iontrader.com/client-api)
-- **FIX API**: [https://iontrader.com/fix-api](https://iontrader.com/fix-api)
+- **TCP API**: [https://scaletrade.com/tcp](https://scaletrade.com/tcp)
+- **Client API**: [https://scaletrade.com/client-api](https://scaletrade.com/client-api)
+- **FIX API**: [https://scaletrade.com/fix-api](https://scaletrade.com/fix-api)
 
 ---
 
 ## Requirements
 
 - PHP **v8.0 or higher**
-- Valid **IonTrader JWT token**
+- Valid **ScaleTrade JWT token**
 - **reactphp/socket** (installed via Composer)
 
 ---
@@ -180,6 +180,6 @@ See [`LICENSE`](LICENSE) for more information.
 
 **Made with passion for high-frequency trading**
 
-[iontrader.com](https://iontrader.com) · [GitHub](https://github.com/iontrader/server-api-php)
+[scaletrade.com](https://scaletrade.com) · [GitHub](https://github.com/scaletrade/server-api-php)
 
 </div>
